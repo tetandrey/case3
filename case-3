@@ -1,0 +1,61 @@
+from random import randint
+
+print('Игра угадай число')
+print('В которой Вы указываете диапозон и количество попыток')
+print('Укажите диапазон чисел и желаемое кол-во попыток')
+
+wins = 0
+defeats = 0
+play = 1
+
+while play:
+  while True:
+    try:
+      Min_num = int(input('Число ОТ:'))
+      Max_num = int(input('Число ДО:'))
+    except ValueError:
+      print('Недопустимый ввод') 
+    else:
+      if Min_num >= Max_num:
+        print('Неправильно!!! Число ДО больше и не равно Числу ОТ')
+        continue
+      else:
+        break
+    
+  GGG = (Max_num-Min_num+1)//2
+      
+  while True:
+    try:
+      attempts = int(input('Введите кол-во попыток:'))
+    except ValueError:
+      print('Недопустимый ввод')
+    else:  
+      if attempts > GGG:
+        print('Слишком много попыток, возьмите меньше попыток.')
+        continue
+      else:
+        break
+  
+  X = randint(Min_num,Max_num)    
+          
+  for y in range(attempts):
+      
+    y = int(input("Угадайте целое число от "+ str(Min_num)+" до " + str(Max_num)+" (осталось {} попыток)".format(attempts - y)))
+    
+  
+    if y == X:
+      print("Вы угадали")
+      wins += 1
+      break
+    else:
+      print("Не угадали!")
+      print("В следующий раз повезёт!")
+      print("Ваше число " + ("больше" if y > X else "меньше") + ", чем задумали")
+      defeats += 1
+  
+  print("Загаданным числом было: " + str(X))
+  print("Результат: Победы -", wins, ", Проигрыш -", defeats, ", Всего игр:",wins+defeats)
+  
+  play = int(input("\n Продолжим? [0 - no, 1 - yes]"))
+  
+input("\n\n Нажмите Enter для выхода.")
